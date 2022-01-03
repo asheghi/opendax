@@ -1,9 +1,9 @@
 - key:               eth-<%= @config['parity']['network'] %>
-  name:              Ethereum <%= @config['parity']['network'].capitalize %>
-  client:            parity
-  server:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
-  height:            8670000
-  min_confirmations: 6
+  name:              Geth Dev
+  client:            geth
+  server:            http://geth:<%= @config['parity']['rpcport'] %>
+  height:            1
+  min_confirmations: 1
   explorer:
     address:         https://etherscan.io/address/#{address}
     transaction:     https://etherscan.io/tx/#{txid}

@@ -1,14 +1,14 @@
 <% @config['wallets']['eth'].each do |wallet| -%>
 - name:             Ethereum <%= wallet['kind'].capitalize %> Wallet
-  blockchain_key:   eth-<%= @config['parity']['network'] %>
+  blockchain_key:   eth-<%= @config['geth']['network'] %>
   currency_id:      eth
   address:          '<%= wallet['address'] %>'
   kind:             <%= wallet['kind'] %>
   max_balance:      <%= wallet['max_balance'] %>
   status:           active
-  gateway:          parity
+  gateway:          geth
   settings:
-    uri:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
+    uri:            http://<%= @config['geth']['address'] %>:<%= @config['geth']['rpcport'] %>
     secret:         '<%= wallet['secret'] %>'
 <% end %>
 

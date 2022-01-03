@@ -55,6 +55,26 @@ bundle install
 rake -T # To see if ruby and lib works
 ```
 
+### 3.1
+```bash
+#render config
+rake render:config
+
+#start geth before everything
+docker-compose up -Vd geth
+
+#attach to geth js repl
+docker-compose exec geth sh
+geth attach /tmp/geth.ipc
+
+#create new wallet, do this 4 times for each wallet 
+personal.newAccount("secret")
+#copy and paste the address in /config/app.yml -> wallets -> eth
+
+#in another terminal run 
+rake render:config
+```
+
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
 
@@ -241,6 +261,15 @@ Compose files contain component images, environment configuration etc.
 
 These files get rendered from their respective templates that are located under `templates` directory.
 
+## How deposit eth to user wallet(faucet) ?
+```bash
+#attach to geth js repl
+docker-compose exec geth sh
+geth attach /tmp/geth.ipc
+
+#replace to address
+eth.sendTransaction({from:eth.coinbase, to:"0x3b197e84bea22a267332fb714e6058dce21b12ce", value: web3.toWei(0.05, "ether") } )
+```
 ## How to update component image?
 
 Modify `config/app.yml` with correct image and run `rake service:all`

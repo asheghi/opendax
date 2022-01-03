@@ -1,6 +1,19 @@
 version: '3.6'
 
 services:
+  geth:
+    image: ethereum/client-go
+    command: |
+      --dev
+      --http
+      --http.addr "0.0.0.0"
+      --http.api "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+      --http.vhosts=*
+    volumes:
+      - "./data/geth-dev:/root"
+    ports:
+      - 8545:8545
+      - 30303:30303
   parity:
     image: parity/parity:v2.7.2-stable
     restart: always
